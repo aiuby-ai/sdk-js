@@ -1,0 +1,63 @@
+{
+  "name": "@aiuby-ia/flags",
+  "version": "0.2.0",
+  "description": "SDK JS/TS de Feature Management e Runtime Configuration da AIUBY: snapshot, avaliação local, polling com ETag e provedor OpenFeature.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./engine": {
+      "types": "./dist/engine.d.ts",
+      "import": "./dist/engine.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "rm -rf dist && esbuild src/index.ts src/engine.ts --bundle --format=esm --platform=neutral --target=es2020 --outdir=dist && tsc -p tsconfig.json --emitDeclarationOnly",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "prepublishOnly": "npm run typecheck && npm test && npm run build"
+  },
+  "peerDependencies": {
+    "@openfeature/server-sdk": ">=1.13.0",
+    "@openfeature/web-sdk": ">=1.0.0"
+  },
+  "peerDependenciesMeta": {
+    "@openfeature/server-sdk": {
+      "optional": true
+    },
+    "@openfeature/web-sdk": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aiuby-ai/sdk-js.git"
+  },
+  "homepage": "https://aiuby.com/docs",
+  "bugs": {
+    "url": "https://github.com/aiuby-ai/sdk-js/issues"
+  },
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0",
+    "@types/node": "^22.0.0"
+  }
+}
